@@ -22,9 +22,9 @@ export default {
   margin-top: 60px;
   #image-wrapper {
     height: 640px;
+    width: 640px;
     background-repeat: no-repeat;
     position: relative;
-    width: 640px;
   }
 }
 </style>
