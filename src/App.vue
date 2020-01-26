@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="image-wrapper" :style="{backgroundImage: `url(caterpillar.jpg)`}">
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +20,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  #image-wrapper {
+    height: 640px;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 640px;
+  }
 }
 </style>
