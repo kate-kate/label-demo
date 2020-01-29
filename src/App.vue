@@ -2,16 +2,17 @@
     <div id="app">
         <h1>Object Labelling Demo</h1>
         <div id="image-wrapper" :style="{backgroundImage: `url(caterpillar.jpg)`}">
-          <div class="box" :style="{top: '135px', left: '200px', width: '190px', height: '390px'}">
-          </div>
+          <Box b-top="135" b-left="200" b-width="190" b-height="390"/>
         </div>
     </div>
 </template>
 
 <script>
 
+    import Box from "./components/Box";
     export default {
         name: 'app',
+        components: {Box},
     }
 </script>
 
@@ -29,15 +30,6 @@
             width: 640px;
             background-repeat: no-repeat;
             position: relative;
-
-            .box {
-                position: absolute;
-                border: 2px #90ee90 solid;
-                &:hover, &.active {
-                    background-color: rgba(144, 238, 144, .2);
-                }
-                z-index: 3;
-            }
         }
     }
 
