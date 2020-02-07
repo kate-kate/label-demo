@@ -1,11 +1,21 @@
 <template>
     <div id="app">
         <div id="image-wrapper" :style="{backgroundImage: `url(caterpillar.jpg)`}"
-             @mousedown="startDrawingBox" @mousemove="changeBox" @mouseup="stopDrawingBox">
-            <Box v-if="drawingBox.active" :b-width="drawingBox.width" :b-height="drawingBox.height"
-                 :b-top="drawingBox.top" :b-left="drawingBox.left"/>
-            <Box v-for="(box, i) in boxes" :key="i" :b-top="box.top" :b-left="box.left"
-                 :b-width="box.width" :b-height="box.height"/>
+             @mousedown="startDrawingBox"
+             @mousemove="changeBox"
+             @mouseup="stopDrawingBox">
+            <Box v-if="drawingBox.active"
+                 :b-width="drawingBox.width"
+                 :b-height="drawingBox.height"
+                 :b-top="drawingBox.top"
+                 :b-left="drawingBox.left"/>
+            <Box v-for="(box, i) in boxes" :key="i"
+                 :b-top="box.top" :b-left="box.left"
+                 :b-width="box.width" :b-height="box.height"
+                 :b-active="i===activeBoxIndex"
+                 :on-select="makeBoxActive" :b-index="i"
+                 :on-delete="removeBox"
+            />
         </div>
     </div>
 </template>
@@ -34,7 +44,8 @@
                     height: 0,
                     width: 0
                 },
-                boxes: []
+                boxes: [],
+                activeBoxIndex: null,
             }
         },
         methods: {
@@ -69,6 +80,15 @@
                         width: 0
                     }
                 }
+            },
+            makeBoxActive(i) {
+                this.activeBoxIndex = i;
+            },
+            removeBox(i) {
+                this.boxes = this.boxes.filter((elem, index) => {
+                    return index !== i;
+                });
+                this.activeBoxIndex = null;
             },
         }
     }

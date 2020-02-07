@@ -1,6 +1,23 @@
 <template>
     <div class="box-wrapper">
-        <div class="box" :style="{top: bTop + 'px', left: bLeft + 'px', width: bWidth + 'px', height: bHeight + 'px'}">
+        <a class="box-delete"
+           v-on:click="removeMyself"
+           v-if="bActive"
+           :style="{
+               top: (bTop - 18) +'px',
+               left: (bLeft + bWidth) + 'px'
+               }">
+            x
+        </a>
+        <div class="box" :style="{
+                 top: bTop + 'px',
+                 left: bLeft + 'px',
+                 width: bWidth + 'px',
+                 height: bHeight + 'px'
+             }"
+             v-bind:class="{'active': bActive}"
+             @mousedown="selectBox"
+        >
         </div>
     </div>
 </template>
@@ -9,8 +26,17 @@
     export default {
         name: "Box",
         props: [
-            'b-top', 'b-left', 'b-width', 'b-height'
-        ]
+            'b-top', 'b-left', 'b-width', 'b-height',
+            'on-select', 'b-active', 'b-index', 'on-delete'
+        ],
+        methods: {
+            selectBox() {
+                this.onSelect(this.bIndex)
+            },
+            removeMyself() {
+                this.onDelete(this.bIndex)
+            },
+        }
     }
 </script>
 
@@ -24,5 +50,14 @@
         }
 
         z-index: 3;
+    }
+    .box-delete {
+        position: absolute;
+        z-index: 6;
+        font-weight: bold;
+        color: red;
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: bold;
     }
 </style>
