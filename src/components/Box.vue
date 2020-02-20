@@ -1,5 +1,13 @@
 <template>
     <div class="box-wrapper">
+        <div class="label"
+             v-if="bLabel"
+             :style="{
+                 top: (bTop - 10) + 'px',
+                 left: bLeft + 'px',
+                 width: (bWidth + 4) + 'px'}">
+            {{ bLabel }}
+        </div>
         <a class="box-delete"
            v-on:click="removeMyself"
            v-if="bActive"
@@ -26,7 +34,7 @@
     export default {
         name: "Box",
         props: [
-            'b-top', 'b-left', 'b-width', 'b-height',
+            'b-top', 'b-left', 'b-width', 'b-height', 'b-label',
             'on-select', 'b-active', 'b-index', 'on-delete'
         ],
         methods: {
@@ -50,6 +58,15 @@
         }
 
         z-index: 3;
+    }
+    .label {
+        position: absolute;
+        height: 22px;
+        font-size: 16px;
+        color: #000;
+        font-weight: bold;
+        background-color: #90ee90;
+        z-index: 4;
     }
     .box-delete {
         position: absolute;

@@ -1,5 +1,16 @@
 <template>
     <div id="app">
+        <div id="label-bar">
+            <h4>Your boxes</h4>
+            <ul>
+                <li v-for="(box, i) in boxes" :key="i"
+                    v-bind:class="{'active': i===activeBoxIndex}">
+                    <input v-model="box.label"
+                           v-on:click="makeBoxActive(i)"/>
+                    <a @click="removeBox(i)">x</a>
+                </li>
+            </ul>
+        </div>
         <div id="image-wrapper" :style="{backgroundImage: `url(caterpillar.jpg)`}"
              @mousedown="startDrawingBox"
              @mousemove="changeBox"
@@ -11,6 +22,7 @@
                  :b-left="drawingBox.left"/>
             <Box v-for="(box, i) in boxes" :key="i"
                  :b-top="box.top" :b-left="box.left"
+                 :b-label="box.label"
                  :b-width="box.width" :b-height="box.height"
                  :b-active="i===activeBoxIndex"
                  :on-select="makeBoxActive" :b-index="i"
@@ -107,6 +119,33 @@
             width: 640px;
             background-repeat: no-repeat;
             position: relative;
+        }
+
+        #label-bar {
+            float: right;
+            margin-right: 50px;
+            width: 220px;
+
+            ul {
+                padding: 0;
+
+                li {
+                    list-style-type: none;
+                    padding: 8px 16px;
+
+                    &.active {
+                        background-color: lightblue;
+                    }
+
+                    a {
+                        cursor: pointer;
+                        display: inline-block;
+                        margin-left: 4px;
+                        font-weight: bold;
+                        color: red;
+                    }
+                }
+            }
         }
     }
 
